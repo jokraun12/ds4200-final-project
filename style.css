@@ -34,7 +34,7 @@ body {
   }
   
   nav ul li a:hover {
-    background-color: #001122;
+    background-color: #91578d;
   }
   
   main {
@@ -42,7 +42,6 @@ body {
     max-width: 900px;
     margin: auto;
     background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   section {
