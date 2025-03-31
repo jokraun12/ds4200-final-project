@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Chart - Supply Chain</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .bubble { stroke: black; stroke-width: 1px; opacity: 0.7; }
+        .tooltip {
+            position: absolute;
+            background: lightgray;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="600"></svg>
+    <div class="tooltip"></div>
+
+    <script>
+        d3.csv("SCM_Dataset_plus_MarketCap.csv").then(data => {
+            // Convert numeric columns from strings to numbers
+            data.forEach(d => {
+                d.supplier_count = +d["Supplier Count"];
+                d.satisfaction = +d["Customer Satisfaction (%)"];
+                d.market_cap = +d["Market Cap"]; // Convert to billions
+            });
+    
+            // Sort data by market cap in descending order and take the top 20
+            const top20Data = data.sort((a, b) => b.market_cap - a.market_cap).slice(1, 20);
+    
+            const width = 800, height = 600;
+            const svg = d3.select("svg");
+            const tooltip = d3.select(".tooltip");
+    
+            const rScale = d3.scaleSqrt()
+                .domain([d3.min(top20Data, d => d.market_cap), d3.max(top20Data, d => d.market_cap)])
+                .range([5, 100]); // Adjusted range
+    
+            // Initialize simulation
+            const simulation = d3.forceSimulation(top20Data)
+                .force("x", d3.forceX(width / 2).strength(0.05)) // Center horizontally
+                .force("y", d3.forceY(height / 2).strength(0.05)) // Center vertically
+                .force("collide", d3.forceCollide(d => rScale(d.market_cap) + 2)) // Prevent overlap
+                .on("tick", ticked);
+    
+            // Create circles
+            const circles = svg.selectAll("circle")
+                .data(top20Data)
+                .enter()
+                .append("circle")
+                .attr("r", d => rScale(d.market_cap))
+                .attr("class", "bubble")
+                .on("mouseover", (event, d) => {
+                    tooltip.style("display", "block")
+                        .html(`<strong>${d["Company Name"]}</strong><br>Suppliers: ${d.supplier_count}<br>Customer Sat: ${d.satisfaction}%<br>Market Cap: $${(d.market_cap / 1e12).toFixed(2)}T`)
+                        .style("left", `${event.pageX + 10}px`)
+                        .style("top", `${event.pageY - 10}px`);
+                })
+                .on("mouseout", () => tooltip.style("display", "none"));
+    
+            // Add labels (company names)
+            const labels = svg.selectAll("text")
+                .data(top20Data)
+                .enter()
+                .append("text")
+                .attr("class", "label")
+                .text(d => d["Company Name"])
+                .style("font-size", "10px") // Adjust font size as needed
+                .style("text-anchor", "middle") // Center the text
+                .style("pointer-events", "none"); // Prevent text from interfering with mouse events
+    
+            // Update circle and label positions on each tick
+            function ticked() {
+                circles
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+    
+                labels
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y);
+            }
+        });
+    </script>
