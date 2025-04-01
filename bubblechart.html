@@ -10,7 +10,8 @@
         .bubble { stroke: white; stroke-width: 1px;} */
         .tooltip {
             position: absolute;
-            background: lightgray;
+            background: grey;
+            color: black;
             padding: 5px;
             border-radius: 5px;
             display: none;
@@ -20,7 +21,7 @@
     </style>
 </head>
 <body>
-    <svg width="1000" height="550"></svg>
+    <svg width="850" height="550"></svg>
     <div class="tooltip"></div>
 
     <script>
@@ -37,7 +38,6 @@
     
             // Sort data by market cap in descending order and take the top 20
             const top20Data = filteredData.sort((a, b) => b.market_cap - a.market_cap).slice(0, 20);
-    
             const width = 800, height = 600;
             const svg = d3.select("svg");
             
@@ -47,7 +47,6 @@
                 .attr("y", 30) 
                 .attr("text-anchor", "middle") 
                 .style("font-size", "20px") 
-                .style("font-weight", "bold") 
                 .text("Top 20 Companies by Market Cap and SCM Practices");
 
             // const tooltip = d3.select(".tooltip");
@@ -59,7 +58,7 @@
                 .range([5, 100]); // Adjusted range
     
             // Create a color scale for SCM Practices
-            const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+            const colorScale = d3.scaleOrdinal(d3.schemeAccent)
                 .domain(top20Data.map(d => d.scm_practices));
     
             // Initialize simulation
@@ -68,6 +67,8 @@
                 .force("y", d3.forceY(height / 2).strength(0.05)) // Center vertically
                 .force("collide", d3.forceCollide(d => rScale(d.market_cap) + 2)) // Prevent overlap
                 .on("tick", ticked);
+
+            
     
             // Create circles
             const circles = svg.selectAll("circle")
@@ -83,35 +84,48 @@
                         .style("left", `${event.pageX + 10}px`)
                         .style("top", `${event.pageY + 10}px`)
                         .style("z-index", "10")
-                        .style("position", "absolute");
-                })
-                .on("mouseout", () => tooltip.style("display", "none"));
-    
+                        .style("position", "absolute")
+                        .style("background", "white")
+                        .style("color", "black");
+                }).on("mouseout", () => tooltip.style("display", "none"));
+
+            
             // Add labels (company names)
             const labels = svg.selectAll("text")
                 .data(top20Data)
                 .enter()
                 .append("text")
                 .attr("class", "label")
-                .text(d => d["Company Name"])
-                .style("font-size", "10px") // Adjust font size as needed
+                .text(d => d["Company Name"] || "Unknown")
+                .style("font-size", "12px") // Adjust font size as needed
                 .style("text-anchor", "middle") // Center the text
                 .style("pointer-events", "none"); // Prevent text from interfering with mouse events
-    
+        
+                console.log(labels);
             // Update circle and label positions on each tick
             function ticked() {
                 circles
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y);
-    
+
                 labels
                     .attr("x", d => d.x)
                     .attr("y", d => d.y);
+
+                // Debugging: Log the position of the label for "Apple"
+                labels.each(function(d) {
+        if (d["Company Name"] === "Apple") {
+            console.log("Apple Label Position:", d.x, d.y);
+        }
+    });
             }
 
+            
             // Create a legend
             const legend = svg.append("g")
                 .attr("transform", `translate(650, 50)`); // Position legend at the right side
+
+            
 
             const legendData = [...new Set(top20Data.map(d => d.scm_practices))]; // Unique SCM Practices
 
@@ -126,7 +140,7 @@
             legendItems.append("circle")
                 .attr("r", 8)
                 .attr("fill", d => colorScale(d))
-                .attr("stroke", "black");
+                .attr("stroke", "white");
 
             // Legend text
             legendItems.append("text")
@@ -135,5 +149,7 @@
                 .style("font-size", "12px")
                 .text(d => d);
 
+
         });
     </script>
+
