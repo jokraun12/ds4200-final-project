@@ -13,7 +13,7 @@
     <nav>
       <ul>
         <li><a href="#about">About</a></li>
-        <li><a href="#data">Data</a></li>
+        <li><a href="#data">Data & Sourcing</a></li>
         <li><a href="#viz">Visualizations</a></li>
         <li><a href="#analysis">Analysis</a></li>
         <li><a href="#summary">Summary</a></li>
@@ -37,24 +37,50 @@
       </section>
 
     <section id="data">
-        <h2>Data</h2>
+        <h2>Data & Sourcing Process</h2>
         <p>Our dataset is composed of data from various companies detailing their Supply Chain Management (SCM) practices, performance metrics, and green logistics initiatives.
-            The data contains 1000 observed companies with 29 recorded features. As an extension of our dataset, we will be including firm share price performance as a part of our data processing to get further insight into the relationship between SCM practices and financial performance.
+            The data contains 1000 observed companies with 29 recorded features. As an extension to these observations, we have incorporated the use of Yahoo Finance's API through
+            the <i>yfinance</i> Python package to retrieve financial data on firms in our dataset.  To correctly retrieve the correct data on firms only listed on US stock exchanges,
+            we made a series of 1000 GET requests to Yahoo Finance's server to get the listed stock exchange for each firm in our SCM dataset.  <br></br>
+            Once this was completed, we were able to slice our dataset to only look at firms listed on US stock exchanges.  After finding the top firms by Operational Efficiency Score
+            for each SCM practice, we then downloaded share price data from 2018 to 2024 on those firms.  This is how we sourced the financial data to supplement our original
+            dataset.
         </p>
     </section>
 
     <section id="viz">
       <h2>Visualizations</h2>
-        <h3>1. Box Plot: Operational Efficiency by SCM Practice</h3>
+        <h3>I. Box Plot: Operational Efficiency by SCM Practice</h3>
         <iframe src="scm_boxplot.html" width="1000" height="700" style="border:none;"></iframe>
-        <h3>2. Bubble Chart: Market Cap vs. Customer Satisfaction</h3>
+        <h3>II. Bubble Chart: Market Cap vs. Customer Satisfaction</h3>
         <iframe src="bubblechart.html" width="1200" height="600" style="border:none;"></iframe>
-        <h3>3. Scatterplot: Customer Satisfaction by Inventory Turnover grouped by SCM Practice</h3>
+        <h3>III. Comparing SCM Practices by Key Metrics</h3>
         <iframe src="scatterplot_fig.html" width="1000" height="600" style="border:none;"></iframe>
-        <h3>4. Line Chart: Prices Overtime of Top SCM Firms by Operational Efficiency Score</h3>
+        <p><strong><i>Figure 3. </i></strong> The above visualization breaks out each SCM Practice to show the relationship between the average 
+          Customer Satisfaction Rating and the Inventory Turnover Ratio for each respective practice.  The <i>inventory turnover ratio</i> can be 
+          described as the rate that inventory stock is sold, or used, and replaced.  <br></br>
+
+          In terms of highest average inventory turnover ratio, the <strong>Efficient Consumer Response</strong> strategy boasts a ratio of 10.025, alongside
+          a customer satisfaction rating of 88.75%.  
+
+          Further, the <strong>Cross-Docking </strong>strategy boasts the highest average customer satisfaction rating, that being 90.33%, alongside an
+          inventory turnover ratio of 9.21.
+          <br></br>
+
+          <strong>Note: </strong><i>Inventory Turnover Ratio = Cost of Goods Sold / Average Inventory</i>; generally, a higher ratio indicates more efficient
+          SCM processes.
+          <br></br><br></br>
+        </p>
+        <h3>IV. Relationship bewteen SCM Practice & Financial Performance</h3>
         <iframe src="stock_prices_plot.html" width="1000" height="600" style="border:none;"></iframe>
-        <h3>5. Line Chart: Cumulative Returns Overtime of Top SCM Firms by Operational Efficiency Score</h3>
+        <p><strong><i>Figure 4.1 </i></strong> The above figure displays the share price of 7 companies over time.  Each of these companies has been identified
+          as the top firm by Operational Efficiency Score for their respective SCM practice.
+        </p>
         <iframe src="cum_rtns_plot.html" width="1000" height="600" style="border:none;"></iframe>
+        <p><strong><i>Figure 4.2 </i></strong> The above figure displays the cumulative return on the stock of of 7 companies over time.  Each of these companies has been identified
+          as the top firm by Operational Efficiency Score for their respective SCM practice.
+        </p>
+
     </section>
 
     <section id="analysis">
