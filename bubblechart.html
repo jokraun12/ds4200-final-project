@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <svg width="1000" height="800"></svg>
+    <svg width="1000" height="600"></svg>
     <div class="tooltip"></div>
 
     <script>
@@ -74,12 +74,15 @@
                 .attr("class", "bubble")
                 .attr("fill", d => colorScale(d.scm_practices)) // Set color based on SCM Practices
                 .on("mouseover", (event, d) => {
+                    const svgBounds = svg.node().getBoundingClientRect(); // Get the chart's position on the page
+
                     tooltip.style("display", "block")
                         .html(`<strong>${d["Company Name"]}</strong><br>SCM Practice: ${d.scm_practices}<br>Suppliers: ${d.supplier_count}<br>Market Cap: $${(d.market_cap / 1e12).toFixed(2)}T`)
-                        .style("left", `${event.clientX}px`)
-                        .style("top", `${event.clientY}px`);
+                        .style("left", `${event.pageX - svgBounds.left + 10}px`) // Adjust for the chart's position
+                        .style("top", `${event.pageY - svgBounds.top + 10}px`); // Adjust for the chart's position
                 })
                 .on("mouseout", () => tooltip.style("display", "none"));
+                
     
             // Add labels (company names)
             const labels = svg.selectAll("text")
@@ -120,7 +123,7 @@
             legendItems.append("circle")
                 .attr("r", 8)
                 .attr("fill", d => colorScale(d))
-                .attr("stroke", "black");
+                .attr("stroke", "white");
 
             // Legend text
             legendItems.append("text")
@@ -131,3 +134,5 @@
 
         });
     </script>
+
+    
