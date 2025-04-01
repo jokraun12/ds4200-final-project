@@ -46,7 +46,7 @@
                 .attr("x", width / 2) 
                 .attr("y", 30) 
                 .attr("text-anchor", "middle") 
-                .style("font-size", "20px") 
+                .style("font-size", "18px") 
                 .text("Top 20 Companies by Market Cap and SCM Practices");
 
             // const tooltip = d3.select(".tooltip");
@@ -55,7 +55,7 @@
     
             const rScale = d3.scaleSqrt()
                 .domain([d3.min(top20Data, d => d.market_cap), d3.max(top20Data, d => d.market_cap)])
-                .range([5, 100]); // Adjusted range
+                .range([5, 100]); 
     
             // Create a color scale for SCM Practices
             const colorScale = d3.scaleOrdinal(d3.schemeAccent)
@@ -63,12 +63,10 @@
     
             // Initialize simulation
             const simulation = d3.forceSimulation(top20Data)
-                .force("x", d3.forceX(width / 2).strength(0.05)) // Center horizontally
-                .force("y", d3.forceY(height / 2).strength(0.05)) // Center vertically
-                .force("collide", d3.forceCollide(d => rScale(d.market_cap) + 2)) // Prevent overlap
+                .force("x", d3.forceX(width / 2).strength(0.05))
+                .force("y", d3.forceY(height / 2).strength(0.05)) 
+                .force("collide", d3.forceCollide(d => rScale(d.market_cap) + 2))
                 .on("tick", ticked);
-
-            
     
             // Create circles
             const circles = svg.selectAll("circle")
@@ -77,7 +75,7 @@
                 .append("circle")
                 .attr("r", d => rScale(d.market_cap))
                 .attr("class", "bubble")
-                .attr("fill", d => colorScale(d.scm_practices)) // Set color based on SCM Practices
+                .attr("fill", d => colorScale(d.scm_practices)) 
                 .on("mouseover", (event, d) => {
                     tooltip.style("display", "block")
                         .html(`<strong>${d["Company Name"]}</strong><br>SCM Practice: ${d.scm_practices}<br>Suppliers: ${d.supplier_count}<br>Market Cap: $${(d.market_cap / 1e12).toFixed(2)}T`)
@@ -97,9 +95,9 @@
                 .append("text")
                 .attr("class", "label")
                 .text(d => d["Company Name"] || "Unknown")
-                .style("font-size", "12px") // Adjust font size as needed
-                .style("text-anchor", "middle") // Center the text
-                .style("pointer-events", "none"); // Prevent text from interfering with mouse events
+                .style("font-size", "12px") 
+                .style("text-anchor", "middle") 
+                .style("pointer-events", "none"); 
         
                 console.log(labels);
             // Update circle and label positions on each tick
@@ -111,30 +109,23 @@
                 labels
                     .attr("x", d => d.x)
                     .attr("y", d => d.y);
-
-                // Debugging: Log the position of the label for "Apple"
-                labels.each(function(d) {
-        if (d["Company Name"] === "Apple") {
-            console.log("Apple Label Position:", d.x, d.y);
-        }
-    });
             }
 
             
             // Create a legend
             const legend = svg.append("g")
-                .attr("transform", `translate(650, 50)`); // Position legend at the right side
+                .attr("transform", `translate(650, 50)`); 
 
             
 
-            const legendData = [...new Set(top20Data.map(d => d.scm_practices))]; // Unique SCM Practices
+            const legendData = [...new Set(top20Data.map(d => d.scm_practices))]; 
 
             const legendItems = legend.selectAll(".legend-item")
                 .data(legendData)
                 .enter()
                 .append("g")
                 .attr("class", "legend-item")
-                .attr("transform", (d, i) => `translate(0, ${i * 25})`); // Space items vertically
+                .attr("transform", (d, i) => `translate(0, ${i * 25})`); 
 
             // Legend circles
             legendItems.append("circle")
