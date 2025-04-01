@@ -14,11 +14,13 @@
             padding: 5px;
             border-radius: 5px;
             display: none;
+            pointer-events: none;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-    <svg width="1000" height="800"></svg>
+    <svg width="1000" height="550"></svg>
     <div class="tooltip"></div>
 
     <script>
@@ -48,7 +50,9 @@
                 .style("font-weight", "bold") 
                 .text("Top 20 Companies by Market Cap and SCM Practices");
 
-            const tooltip = d3.select(".tooltip");
+            // const tooltip = d3.select(".tooltip");
+            const tooltip = d3.select("body").append("div")
+                            .attr("class", "tooltip");
     
             const rScale = d3.scaleSqrt()
                 .domain([d3.min(top20Data, d => d.market_cap), d3.max(top20Data, d => d.market_cap)])
@@ -76,8 +80,10 @@
                 .on("mouseover", (event, d) => {
                     tooltip.style("display", "block")
                         .html(`<strong>${d["Company Name"]}</strong><br>SCM Practice: ${d.scm_practices}<br>Suppliers: ${d.supplier_count}<br>Market Cap: $${(d.market_cap / 1e12).toFixed(2)}T`)
-                        .style("left", `${event.clientX}px`)
-                        .style("top", `${event.clientY}px`);
+                        .style("left", `${event.pageX + 10}px`)
+                        .style("top", `${event.pageY + 10}px`)
+                        .style("z-index", "10")
+                        .style("position", "absolute");
                 })
                 .on("mouseout", () => tooltip.style("display", "none"));
     
