@@ -7,7 +7,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; }
-        .bubble { stroke: black; stroke-width: 1px; opacity: 0.7; }
+        .bubble { stroke: white; stroke-width: 1px;} */
         .tooltip {
             position: absolute;
             background: lightgray;
@@ -18,28 +18,45 @@
     </style>
 </head>
 <body>
-    <svg width="800" height="600"></svg>
+    <svg width="1000" height="800"></svg>
     <div class="tooltip"></div>
 
     <script>
-        d3.csv("SCM_Dataset_plus_MarketCap.csv").then(data => {
-            // Convert numeric columns from strings to numbers
-            data.forEach(d => {
-                d.supplier_count = +d["Supplier Count"];
-                d.satisfaction = +d["Customer Satisfaction (%)"];
-                d.market_cap = +d["Market Cap"]; // Convert to billions
+        d3.csv("data/SCM_Dataset_plus_MarketCap_Exchange.csv").then(data => {
+            // Convert numeric columns from strings to numbers and filter for "US Exchange" === true
+            const filteredData = data.filter(d => d["US Exchange"] === "True").map(d => {
+                return {
+                    ...d,
+                    supplier_count: +d["Supplier Count"],
+                    market_cap: +d["Market Cap"],
+                    scm_practices: d["SCM Practices"]
+                };
             });
     
             // Sort data by market cap in descending order and take the top 20
-            const top20Data = data.sort((a, b) => b.market_cap - a.market_cap).slice(1, 20);
+            const top20Data = filteredData.sort((a, b) => b.market_cap - a.market_cap).slice(0, 20);
     
             const width = 800, height = 600;
             const svg = d3.select("svg");
+            
+            // Add a title to the chart
+            svg.append("text")
+                .attr("x", width / 2) 
+                .attr("y", 30) 
+                .attr("text-anchor", "middle") 
+                .style("font-size", "20px") 
+                .style("font-weight", "bold") 
+                .text("Top 20 Companies by Market Cap and SCM Practices");
+
             const tooltip = d3.select(".tooltip");
     
             const rScale = d3.scaleSqrt()
                 .domain([d3.min(top20Data, d => d.market_cap), d3.max(top20Data, d => d.market_cap)])
                 .range([5, 100]); // Adjusted range
+    
+            // Create a color scale for SCM Practices
+            const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+                .domain(top20Data.map(d => d.scm_practices));
     
             // Initialize simulation
             const simulation = d3.forceSimulation(top20Data)
@@ -55,11 +72,12 @@
                 .append("circle")
                 .attr("r", d => rScale(d.market_cap))
                 .attr("class", "bubble")
+                .attr("fill", d => colorScale(d.scm_practices)) // Set color based on SCM Practices
                 .on("mouseover", (event, d) => {
                     tooltip.style("display", "block")
-                        .html(`<strong>${d["Company Name"]}</strong><br>Suppliers: ${d.supplier_count}<br>Customer Sat: ${d.satisfaction}%<br>Market Cap: $${(d.market_cap / 1e12).toFixed(2)}T`)
-                        .style("left", `${event.pageX + 10}px`)
-                        .style("top", `${event.pageY - 10}px`);
+                        .html(`<strong>${d["Company Name"]}</strong><br>SCM Practice: ${d.scm_practices}<br>Suppliers: ${d.supplier_count}<br>Market Cap: $${(d.market_cap / 1e12).toFixed(2)}T`)
+                        .style("left", `${event.clientX}px`)
+                        .style("top", `${event.clientY}px`);
                 })
                 .on("mouseout", () => tooltip.style("display", "none"));
     
@@ -84,5 +102,32 @@
                     .attr("x", d => d.x)
                     .attr("y", d => d.y);
             }
+
+            // Create a legend
+            const legend = svg.append("g")
+                .attr("transform", `translate(650, 50)`); // Position legend at the right side
+
+            const legendData = [...new Set(top20Data.map(d => d.scm_practices))]; // Unique SCM Practices
+
+            const legendItems = legend.selectAll(".legend-item")
+                .data(legendData)
+                .enter()
+                .append("g")
+                .attr("class", "legend-item")
+                .attr("transform", (d, i) => `translate(0, ${i * 25})`); // Space items vertically
+
+            // Legend circles
+            legendItems.append("circle")
+                .attr("r", 8)
+                .attr("fill", d => colorScale(d))
+                .attr("stroke", "black");
+
+            // Legend text
+            legendItems.append("text")
+                .attr("x", 15)
+                .attr("y", 5)
+                .style("font-size", "12px")
+                .text(d => d);
+
         });
     </script>
