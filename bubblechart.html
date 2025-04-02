@@ -7,17 +7,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; }
-        .bubble { stroke: white; stroke-width: 1px;} */
-        .tooltip {
-            position: absolute;
-            background: grey;
-            color: black;
-            padding: 5px;
-            border-radius: 5px;
-            display: none;
-            pointer-events: none;
-            z-index: 10;
-        }
+        .bubble { stroke: white; stroke-width: 1px;} 
     </style>
 </head>
 <body>
@@ -49,9 +39,7 @@
                 .style("font-size", "18px") 
                 .text("Top 20 Companies by Market Cap and SCM Practices");
 
-            // const tooltip = d3.select(".tooltip");
-            const tooltip = d3.select("body").append("div")
-                            .attr("class", "tooltip");
+            const tooltip = d3.select("body").append("div");
     
             const rScale = d3.scaleSqrt()
                 .domain([d3.min(top20Data, d => d.market_cap), d3.max(top20Data, d => d.market_cap)])
@@ -83,7 +71,9 @@
                         .style("top", `${event.pageY + 10}px`)
                         .style("z-index", "10")
                         .style("position", "absolute")
-                        .style("background", "white")
+                        .style("background", "lightgrey")
+                        .style("padding", "10px")
+                        .style("border-radius", "5px")
                         .style("color", "black");
                 }).on("mouseout", () => tooltip.style("display", "none"));
 
@@ -106,9 +96,22 @@
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y);
 
+                const labels = svg.selectAll(".label")
+                                    .data(top20Data);
+
                 labels
+                    .enter()
+                    .append("text")
+                    .attr("class", "label")
+                    .merge(labels) // Merge new and existing labels
                     .attr("x", d => d.x)
-                    .attr("y", d => d.y);
+                    .attr("y", d => d.y + 5) // Slightly offset the label vertically
+                    .text(d => d["Company Name"] || "Unknown")
+                    .style("font-size", "12px")
+                    .style("text-anchor", "middle")
+                    .style("pointer-events", "none");
+
+                labels.exit().remove();
             }
 
             
