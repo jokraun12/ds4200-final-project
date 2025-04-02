@@ -9,6 +9,7 @@
 </head>
 <body>
   <header>
+    <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
     <h1>DS4200 Project Group 10</h1>
     <nav>
       <ul>
@@ -81,19 +82,26 @@
 
     <section id="analysis">
         <h2>Analysis</h2>
-        <h3>I. Comparing SCM Practices by Operational Efficiency</h3>
-        <p>
-          The box plot shows a clear visual comparison of how operational efficiency scores vary across different SCM practices. 
-          Most practices have a median efficiency score of 85, with fairly consistent interquartile ranges which suggests a general industry standard around this value. <br><br>
-
-          Agile SCM displays the widest spread of data that ranges from a minimum of 75 to a maximum of 90, and includes a slightly lower Q1. This tells us that there is broader range of operational efficiency outcomes for companies that adopt Agile SCM, indicating that the success of this approach may depend heavily on how effectively it’s implemented.
-          Cross-Docking contrastingly shows one of the tightest distributions that ranges only from 80 to 85 which indicates consistent operational outcomes across companies that implement it. <br><br>
-
-          Interestingly, Just-In-Time and Lean Manufacturing have the same upper quartile and median of 85 but Just-In-Time does have a slightly narrower range between its lowest and highest values. This indicates that companies using this SCM often achieve more similar and predictable efficiency outcomes.
-          Sustainable SCM stands out with an outlier on the lower end at 75, suggesting that even though the median is competitive there may be firms struggling to efficiently integrate sustainability into their supply chain operations. 
-        </p>
-        <h3>II. </h3>
+        <h3>I. </h3>
         <p>x</p>
+        <h3>II. Market Leaders and Their Supply Chain Strategies </h3>
+        <p>
+          This chart highlights the dominance of certain supply chain approaches among large corporations. The SCM practices are categorized using different colors, 
+          as detailed in the legend. The most prominent SCM strategies appear to be <strong>Agile SCM</strong> (green) and <strong>Lean Manufacturing</strong> (purple), 
+          which are utilized by major corporations such as Apple, Amazon, Nvidia, and Microsoft. Less common practices, such as Vendor Managed Inventory (red) and 
+          Efficient Consumer Response (brown), are represented by fewer companies. This suggests that certain SCM strategies are more widely adopted by industry leaders, 
+          potentially due to their scalability and efficiency in handling global supply chains.  
+          <br></br>
+          Companies using Agile SCM (Apple, Amazon, Tesla) prioritize rapid response to demand changes, customization, and flexibility in their supply chains. 
+          This more flexible strategy is particularly suited for industries where innovation cycles are fast and consumer demand fluctuates. 
+          Lean Manufacturing (Nvidia, Microsoft, Facebook) focuses on minimizing waste, reducing inefficiencies, and create value for customers to enhance cost efficient 
+          and maintain a steady output. It is valuable for industries where demand is relatively predictable and manufacturing processes can be streamlined. 
+          <br></br>
+          One notable callout is <strong>Google</strong>, which employs the <strong>Cross-Docking SCM</strong> strategy and has a simnifically larger number of supplies—approximately <strong>20,000</strong>. 
+          This extensive supplier network is a key differentiator, allowing Google to maintain a flexible and responsive supply chain. Cross-docking minimizes 
+          storage time by directly transferring incoming shipments to outbound transportation, reducing warehousing costs and improving efficiency. 
+          Google’s reliance on this approach likely plays a role in managing its large supplier base to ensure smooth operations. 
+        </p>
         <h3>III. Comparing SCM Practices by Key Metrics</h3>
         <p>
           In terms of highest average inventory turnover ratio, the <strong>Efficient Consumer Response</strong> strategy boasts a ratio of 10.025, alongside
@@ -102,26 +110,7 @@
           Further, the <strong>Cross-Docking </strong>strategy boasts the highest average customer satisfaction rating, that being 90.33%, alongside an
           inventory turnover ratio of 9.21.
           <br></br>
-        </p>
-        <h3>IV. Relationship bewteen SCM Practice & Financial Performance</h3>
-        <p>
-          Evaluating financial data of top performing firms on any level is a difficult way to find differentiation, as most of them (outside of individual
-          firm volatility) follow the overall market trends.  However, with the unfortunate occurrence of COVID-19, we experienced a large recessionary
-          downturn in the market in March of 2022.  This can be indicated by the dashed vertical lines present on the axis of the two aforementioned visualizations.
-          <br></br>
-          <i><a href="#summary">*See more information on the relation of COVID-19 and SCM in part IV of the Summary Section.</a></i>
-        </p>
-        <h3>V. </h3>
-        <p>x</p>
-      </section>
-    <section id="summary">
-      <h2>Summary of Key Findings</h2>
-        <h3>I. </h3>
-        <p>x</p>
-        <h3>II. </h3>
-        <p>x</p>
-        <h3>III. Comparing SCM Practices by Key Metrics</h3>
-        <p>
+
           We can clearly see that there is a trend between higher <i>inventory turnover ratio</i> and a higher <i>customer satisfaction rating,</i> with the
           exception of one outlier in the plotted data-points: <strong>Cross-Docking.</strong> <br></br>
           
@@ -130,25 +119,78 @@
           can indicate a risk that the firm may not have enough stock on hand at some given times to meet consumer demand.  Given the lower customer
           satisfaction rating for such a high inventory turnover ratio, we can draw the conclusion that <strong>Cross-Docking</strong> may be a practice
           that prioritizes inventory turnover over meeting the needs of the consumer, or rather the needs of the firm's distribution systems.
-
+          <br></br>
         </p>
         <h3>IV. Relationship bewteen SCM Practice & Financial Performance</h3>
-        <p></p>
-        <h3>V. </h3>
+        <p>
+          Evaluating financial data of top performing firms on any level is a difficult way to find differentiation, as most of them (outside of individual
+          firm volatility) follow the overall market trends.  However, with the unfortunate occurrence of COVID-19, we experienced a large recessionary
+          downturn in the market in March of 2020.  This can be indicated by the dashed vertical lines present on the axis of the two aforementioned visualizations.
+          <br></br>
+          While COVID-19 impacted the world economy on a global stage and in various different aspects, the Global Supply Chain System was uprooted from the ground.
+          Due to this, firms around the globe that lacked the proper SCM strategies and infrastructure were hit particularly badly by the pandemic's recession.  To this
+          effect, we decided to look at the share price performance of various firms at the top of their respective SCM practice as exemplars of how certain strategies
+          held up to the COVID-era recessionary downturn.
+          <br></br>
+          As stated in the caption, the <strong><i>SPY</i></strong> ticker indicates the performance of State Street's S&P500 ETF, which we are using as a benchmark to 
+          track the overall movements of the US stock market during this time.  As we can see, all of the firms we had chosen follow the same share price underperformance
+          during this time period as the market, which is to be expected.  However, the important part to note here is the intensity of the underperformance as well as the 
+          length of recovery time.  This is what we used as our indicator for differentiating between the performance during COVID of specific SCM practices.
+          <br></br>
+          For reference, from our start date of January 1st, 2018 to February 20, 2020, the S&P500 had realized a cumulative return of <i>30.17%</i>.  By March 23, 2020, the S&P500
+          realized a cumulative return of <i>-13.37%</i>.  The market did not return to it's previous high until <strong>August 5th, 2020</strong>.  We will be making our analysis based strictly on 
+          this time period.
+          <br></br>
+          <h4><strong>Interesting SCM Strategy Notes:</strong></h4>
+          <ol>
+            <li>
+            <strong>Cross-Docking: Google</strong>
+              <ul>
+                <li>Feb. 20, 2020: Held Realized Return of <i>42.55%</i></li>
+                <li>Hit a trough of <i>-0.79%</i> on March 23, 2020</li>
+                <li>Steadily rose and rebounded past its previous peak by <strong>July 10th, 2022</strong></li>
+              </ul>
+            </li>
+            <br></br>
+            <li>
+              <strong>Sustainable SCM: Intel</strong>
+              <ul>
+                <li>Intel dropped from a peak of <i>47.51%</i> to a trough of <i>0.54%</i></li>
+                <li>Intel never fully rebounded before the market did, sitting at a cum. return of <i>14.51%</i> come Dec. 31 of 2020</li>
+                <li>It is important to note that the world began to experience a chip shortage after COVID, putting Intel, Nvidia, and AMD on the map 
+                    as some of the most important firms around. Due to the volatility amongst chip producers in the world at the time, it is too
+                    ambiguous to blame poor stock performance solely on Intel's SCM practices, or any one event for that matter.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Agile SCM: Abbott Laboratories</strong>
+              <ul>
+                <li>At it's peak: <i>56.43%</i>, to a COVID low of <i>11.09%</i></li>
+                <li>Abbott Laboratories rebounded to its previous high by <strong>April 14th, 2020</strong>, and continued to outperform the market.</li>
+                <li>Being a med-device company, some of this performance could be attributed to the connections to the healthcare industry that saw outperformance
+                  during COVID.  However the Agile SCM practice is one that encourages lean design and thinking, constantly adapting to change and new adverse conditions
+                  in the market, which would most definitely bode well for a firm attempting to recover during the pandemic.
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </p>
+      </section>
+    <section id="summary">
+      <h2>Summary of Key Findings</h2>
         <p>x</p>
     </section>
     <section id="future">
       <h2>Future Implications</h2>
-        <h3>I. </h3>
-        <p>x</p>
-        <h3>II. </h3>
-        <p>x</p>
-        <h3>III. Comparing SCM Practices by Key Metrics</h3>
-        <p>x</p>
-        <h3>IV. </h3>
-        <p>x</p>
-        <h3>V. </h3>
-        <p>x</p>
+          <ul>
+            <li> Our analysis indicates the increased importance of supply chain resilience. Major events, like COVID, expose vulnerability in supply chains. 
+              Companies will need to move towards the most flexible and adaptive strategies to prepare for future crises. </li>
+            <li> Something about AI</li>
+            <li> Sustainability in SCM practices will become a greater necessity rather than an option as stakeholders demand greener supply chains. 
+              Reduced waste, resource efficiency …</li>
+            <li>If global shipping disruptions occur, companies with high inventory turnover but low flexibility may struggle. </li>
+          </ul>
     </section>
     <section id="references">
         <h2>References</h2>
@@ -173,7 +215,11 @@
   </main>
 
   <footer>
-    <p> Isha Venkatapathy, Zoe Garbus, John Kraunelis</p>
+    <p> 
+      NEU DS4200: Final Project | Isha Venkatapathy, Zoe Garbus, John Kraunelis
+      <br></br>
+      Copyright April 2025 ©
+    </p>
   </footer>
 
   <script>
@@ -188,6 +234,19 @@
       .attr("cy", 200)
       .attr("r", d => d)
       .attr("fill", "purple");
+
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
