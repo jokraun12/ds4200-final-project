@@ -191,44 +191,54 @@
     <section id="summary">
       <h2>Summary of Key Findings</h2>
         <p>
-          This analysis examines the impact and efficiency of various Supply Chain Management (SCM) practices across operational, strategic, and 
-          financial metrics. Operationally, most SCM practices maintain a median efficiency score around 85, though Agile SCM shows more 
-          variability, suggesting implementation plays a crucial role in outcomes. In contrast, Cross-Docking yields highly consistent efficiency 
-          scores. Market leaders such as Apple, Amazon, and Microsoft predominantly adopt Agile and Lean strategies, likely due to their 
-          adaptability and scalability. Financially, companies with Agile SCM demonstrated quicker recoveries post-COVID, while Sustainable SCM 
-          showed less resilience, though external factors such as chip shortages complicate this analysis.
+          Our project examines the impact and efficiency of various Supply Chain Management practices across operational, 
+          strategic, and financial metrics.  Utilizing an Operational Efficiency Score as a KPI, we found that most SCM practices exhibit a 
+          median score around 85, though Agile SCM shows more variability among its datapoints.  Similarly to the Agile Development process in 
+          Software Engineering, Agile SCM prides itself on being a fluid process to ensure that the strategy can smoothly adapt to changes 
+          in the macro and microenvironments – with this line of reasoning as well as the data we uncovered through our analysis, this 
+          suggests that the implementation of this SCM practice plays a crucial role in the final outcome.  
+          <br></br>
+          Large firms and market leaders like Apple, Microsoft, and Amazon predominantly adopt Agile and Lean SCM practices, likely 
+          due to their adaptability and scalability.  From a financial standpoint, firms that have adopted Agile SCM as a distribution 
+          strategy saw quicker recoveries post-COVID, while Sustainable SCM showed less resilience; it is important to note here that 
+          financial performance can be attributed to swathes of different external factors, and we can only draw speculative conclusions without 
+          forming a mathematically accurate factor model for share price analysis.
         </p>
       
         <h3>Key Points:</h3>
       
         <h4>Operational Efficiency:</h4>
         <ul>
-          <li>Most SCM practices cluster around a median score of 85.</li>
+          <li>Most SCM practices in our dataset adopt a median operational efficiency score of 85.</li>
           <li><strong>Agile SCM</strong> shows the widest spread, indicating outcome variability based on execution.</li>
-          <li><strong>Cross-Docking</strong> demonstrates tight consistency in efficiency (80–85 range).</li>
-          <li><strong>Sustainable SCM</strong> features a notable low outlier, hinting at integration challenges.</li>
+          <li><strong>Cross-Docking SCM</strong> demonstrates a dense distribution, indicating consistency amongst efficiency scores</li>
+          <li><strong>Sustainable SCM</strong> features a notable low outlier, hinting at implementation challenges.</li>
         </ul>
       
         <h4>Adoption by Market Leaders:</h4>
         <ul>
-          <li><strong>Agile SCM</strong> (Apple, Amazon, Tesla) suits industries needing flexibility and rapid response.</li>
-          <li><strong>Lean Manufacturing</strong> (Microsoft, Nvidia, Facebook) aligns with efficiency and waste reduction.</li>
-          <li><strong>Google</strong> uses <strong>Cross-Docking</strong>, supporting a massive supplier base (20,000+) and rapid transfer logistics.</li>
+          <li><strong>Agile SCM</strong> (Apple, Amazon, Tesla) is tailored to firms requiring scalability and rapid response.</li>
+          <li><strong>Lean Manufacturing SCM</strong> (Microsoft, Nvidia, Facebook) aligns with efficiency and waste reduction.</li>
+          <li><strong>Cross-Docking SCM</strong>, used by Google, supports their massive supplier base (20,000).</li>
         </ul>
       
         <h4>Performance by Key Metrics:</h4>
         <ul>
-          <li><strong>Efficient Consumer Response</strong> has the highest inventory turnover (10.025) and strong customer satisfaction (88.75%).</li>
-          <li><strong>Cross-Docking</strong> shows highest satisfaction (90.33%) despite slightly lower turnover (9.21).</li>
-          <li>Higher turnover generally correlates with higher satisfaction—though <strong>Cross-Docking</strong> is an exception.</li>
+          <li><strong>Cross-Docking</strong> has the highest average customer satisfaction rating at 90.33% accompanied by the second highest inventory turnover ratio of 9.22.</li>
+          <li><strong>Efficient Consumer Response</strong> has the highest inventory turnover ratio at 10.025, but a slightly lower customer satisfaction rating of 88.75%.</li>
+          <ul>
+            <li>Higher turnover generally correlates with higher satisfaction—though this SCM practice shows this is an exception.
+            </li>
+          </ul>
         </ul>
       
         <h4>Financial Resilience During COVID:</h4>
         <ul>
-          <li><strong>Abbott Labs (Agile SCM)</strong> quickly rebounded and outperformed, showing adaptability.</li>
-          <li><strong>Google (Cross-Docking)</strong> recovered steadily and beat pre-COVID levels by mid-2022.</li>
-          <li><strong>Intel (Sustainable SCM)</strong> did not fully recover by end of 2020; performance impacted by external factors like the chip shortage.</li>
-          <li><strong>Agile SCM</strong> appears best-suited for fast recovery and handling unexpected disruption.</li>
+          <li><strong>Abbott Laboratories (Agile SCM)</strong> rebounded quickly after the COVID market downturn, and consistently outperformed the market.</li>
+          <li><strong>Google (Cross-Docking)</strong> recovered steadily and beat pre-COVID levels by mid-2022, as opposed to the market which didn’t fully recover until August 5th, 2020.</li>
+          <li><strong>Intel (Sustainable SCM)</strong> did not fully recover by the end of 2020; however performance was impacted by external factors like the chip shortage and new strong competitors in the industry.</li>
+          <li>From a logical standpoint, as well as from our information presented by our visualizations, <strong>Agile SCM</strong> appears to be the best distribution and SCM strategy to handle macro-economic downturns, as 
+            well as being the most adaptable to novel adverse conditions.</li>
         </ul>
     </section>
     <section id="future">
@@ -279,18 +289,6 @@
   </footer>
 
   <script>
-    const svg = d3.select("#chart");
-    const data = [10, 15, 20, 25, 30];
-
-    svg.selectAll("circle")
-      .data(data)
-      .enter()
-      .append("circle")
-      .attr("cx", (d, i) => 80 * (i + 1))
-      .attr("cy", 200)
-      .attr("r", d => d)
-      .attr("fill", "purple");
-
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
