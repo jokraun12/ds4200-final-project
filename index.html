@@ -46,12 +46,28 @@
             Once this was completed, we were able to slice our dataset to only look at firms listed on US stock exchanges.  After finding the top firms by Operational Efficiency Score
             for each SCM practice, we then downloaded share price data from 2018 to 2024 on those firms.  This is how we sourced the financial data to supplement our original
             dataset.
+            <br></br>
+            Our dataset includes a range of SCM strategies adopted by firms to improve logistics, responsiveness, and sustainability. These practices are:
+            <ul>  
+              <li> <strong> Agile:</strong> Focuses on flexibility and rapid responsiveness to changing market demands and customer needs.</li>
+              <li> <strong> Efficient Consumer Repsonse:</strong> A collaborative strategy between suppliers and retailers aimed at reducing inefficiencies and improving consumer satisfaction.</li>
+              <li> <strong> Sustainable:</strong> Emphasizes environmentally responsible sourcing, production, and distribution practices to minimize environmental impact.</li>
+              <li><strong> Cross-Docking:</strong> A logistics practice that involves direct transfer of products from inbound to outbound transportation with minimal storage time, reducing inventory costs.</li>
+              <li> <strong> Just-In-Time:</strong> A production strategy that minimizes inventory by receiving goods only as they are needed in the production process.</li>
+              <li> <strong> Vendor Managed Inventory:</strong> A system where the supplier takes responsibility for managing inventory levels at the buyer’s location.</li>
+              <li> <strong> Demand-Driven:</strong> Aligns production and supply chain activities closely with real-time customer demand signals.</li>
+              <li> <strong> Lean Manufacturing:</strong> Aims to eliminate waste and improve process efficiency across the supply chain.</li>
+            </ul>
+            We explore other features in our dataset like key performance indicators to assess the effectiveness of supply chain strategies. 
+            Operational Efficiency is measured using a composite score derived from metrics such as inventory turnover, order fulfillment cycle time, 
+            and cost-to-serve ratios—reflecting a firm’s ability to manage resources and processes effectively. Customer Satisfaction (%) is captured through customer retention rates and
+            on-time delivery percentages, offering insight into how well a company meets customer expectations.
         </p>
     </section>
 
     <section id="viz">
       <h2>Visualizations</h2>
-        <h3>I. Box Plot: Operational Efficiency by SCM Practice</h3>
+        <h3>I. Operational Efficiency by SCM Practice</h3>
         <iframe src="scm_boxplot.html" width="1000" height="700" style="border:none;"></iframe>
         <p><strong><i>Figure 1. </i></strong> The box plot above compares the distribution of operational efficiency scores across various supply chain management (SCM) practices. It provides a clear view of performance ranges and variability within each strategy.</p>
         <h3>II. Market Leaders and Their Supply Chain Strategies</h3>
